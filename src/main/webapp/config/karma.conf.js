@@ -16,7 +16,7 @@ module.exports = function(config){
       'app/lib/angular/angular-scenario.js'
     ],
 
-    autoWatch : true,
+    autoWatch : false,
 
     frameworks: ['jasmine'],
 
@@ -26,6 +26,7 @@ module.exports = function(config){
             'karma-junit-reporter',
             'karma-chrome-launcher',
             'karma-firefox-launcher',
+            'karma-phantomjs-launcher',
             'karma-jasmine'
             ],
 

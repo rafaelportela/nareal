@@ -4,3 +4,6 @@ build
 *.iml
 gradle
 gradlew*
+log*
+out
+*log
