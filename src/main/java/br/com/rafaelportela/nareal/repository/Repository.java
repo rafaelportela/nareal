@@ -20,4 +20,9 @@ public class Repository {
     public void save(Subject subject) {
         jongo.getCollection("subjects").save(subject);
     }
+
+    public Subject getBy(String id) {
+        String query = String.format("{ _id: '%s'}", id);
+        return jongo.getCollection("subjects").findOne(query).as(Subject.class);
+    }
 }
