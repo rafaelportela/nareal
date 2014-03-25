@@ -69,4 +69,22 @@ public class SubjectsServiceTest {
 
         assertThat(created.getTitle(), is("Programming"));
     }
+
+    @Test
+    public void getSubject() throws Exception {
+        HttpResponse response = postSubject();
+
+        Subject created = new ObjectMapper().readValue(
+                response.getEntity().getContent(),
+                Subject.class);
+
+        HttpClient httpClient = new DefaultHttpClient();
+        response = httpClient.execute(new HttpGet("http://localhost:8080/services/subjects/" + created.getId()));
+
+        Subject subject = new ObjectMapper().readValue(
+                response.getEntity().getContent(),
+                Subject.class);
+
+        assertThat(subject.getTitle(), is("Programming"));
+    }
 }
