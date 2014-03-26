@@ -7,6 +7,8 @@ repositories {
     mavenCentral()
 }
 
+defaultTasks "clean", "build"
+
 dependencies {
     compile 'org.eclipse.jetty:jetty-servlet:7.6.0.v20120127'
     compile 'org.eclipse.jetty:jetty-webapp:7.6.0.v20120127'
@@ -24,4 +26,18 @@ dependencies {
     testCompile 'org.apache.httpcomponents:httpclient:4.1.1'
 }
 
+jar {
+    from {
+        // build a fat jar with dependencies
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    manifest {
+        // it goes into manifest file in order to have an executable jar
+        attributes 'Main-Class': 'br.com.rafaelportela.nareal.Main'
+    }
+}
+
+// tell 'gradle run' what is the main class
 mainClassName = "br.com.rafaelportela.nareal.Main"
