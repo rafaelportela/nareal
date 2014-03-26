@@ -1,12 +1,12 @@
-language: node_js
-node_js:
-  - 0.8
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-
 language: java
 jdk:
   - oraclejdk7
 services:
   - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: 2fe2eGZ44907neFb27MTo2WQ/WjjkxuPG1/3MQBJhEYzZdxxgA8Xv/y39f1gIXLyr3f59T11zK6oOSV54io81HQoGnnKa0vnIVBtl9ic5tMzxO2aZv/x6KDzAYyL+n4brOfoDMM9P06InvvrJzaN1ed/LyiF0XCKqODEAO+33dU=
+  app: nareal
+  on:
+    repo: rafaelportela/nareal
