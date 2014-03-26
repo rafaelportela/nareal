@@ -9,6 +9,9 @@ repositories {
 
 defaultTasks "clean", "build"
 
+// heroku uses this task
+task stage(dependsOn: ['clean', 'installApp'])
+
 dependencies {
     compile 'org.eclipse.jetty:jetty-servlet:7.6.0.v20120127'
     compile 'org.eclipse.jetty:jetty-webapp:7.6.0.v20120127'
@@ -38,6 +41,8 @@ jar {
         attributes 'Main-Class': 'br.com.rafaelportela.nareal.Main'
     }
 }
+
+applicationName = 'nareal'
 
 // tell 'gradle run' what is the main class
 mainClassName = "br.com.rafaelportela.nareal.Main"
