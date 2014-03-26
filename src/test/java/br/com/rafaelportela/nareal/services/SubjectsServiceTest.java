@@ -2,6 +2,7 @@ package br.com.rafaelportela.nareal.services;
 
 import br.com.rafaelportela.nareal.Main;
 import br.com.rafaelportela.nareal.model.Subject;
+import br.com.rafaelportela.nareal.repository.Repository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -28,6 +29,7 @@ public class SubjectsServiceTest {
     @BeforeClass
     public static void setup() throws Exception {
         webServer = new Main.WebServer();
+        webServer.setupEnvironment("mongodb://localhost:27017/nareal-test");
         webServer.start();
     }
 

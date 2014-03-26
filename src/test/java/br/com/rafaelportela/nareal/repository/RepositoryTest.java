@@ -15,26 +15,20 @@ import static org.hamcrest.core.Is.is;
 
 public class RepositoryTest {
 
-    private static MongoClient mongoClient;
-    private static Jongo jongo;
-
     private Repository repository;
 
     @BeforeClass
     public static void setUp() throws Exception {
-        mongoClient = new MongoClient("localhost", 27017);
-        jongo = new Jongo(mongoClient.getDB("nareal-test"));
+        String mongoUri = "mongodb://localhost:27017/nareal-test";
+        Repository.setupEnvironment(mongoUri);
     }
 
     @Before
     public void clearData() throws UnknownHostException {
-        jongo.getCollection("subjects").drop();
-        repository = new Repository(jongo);
-    }
+        Repository.getJongo()
+                .getCollection("subjects").drop();
 
-    @AfterClass
-    public static void tearDown() {
-        mongoClient.close();
+        repository = Repository.instance();
     }
 
     @Test

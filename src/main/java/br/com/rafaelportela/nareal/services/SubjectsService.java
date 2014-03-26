@@ -27,10 +27,7 @@ public class SubjectsService {
     @Path("{id}")
     public Subject get(@PathParam("id") String id) throws UnknownHostException {
 
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        Jongo jongo = new Jongo(mongoClient.getDB("nareal-test"));
-
-        Repository repository = new Repository(jongo);
+        Repository repository = Repository.instance();
         Subject subjec = repository.getBy(id);
 
         return subjec;
@@ -40,10 +37,7 @@ public class SubjectsService {
     @Consumes("application/json")
     public Response create(Subject subject) throws UnknownHostException {
 
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        Jongo jongo = new Jongo(mongoClient.getDB("nareal-test"));
-
-        Repository repository = new Repository(jongo);
+        Repository repository = Repository.instance();
         repository.save(subject);
 
         return Response

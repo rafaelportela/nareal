@@ -1,16 +1,33 @@
 package br.com.rafaelportela.nareal.repository;
 
 import br.com.rafaelportela.nareal.model.Subject;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 
+import java.net.UnknownHostException;
+
 public class Repository {
 
-    private final Jongo jongo;
+    private static MongoClient mongoClient;
+    private static Jongo jongo;
 
-    public Repository(Jongo jongo) {
-        this.jongo = jongo;
+    public static void setupEnvironment(String mongoUri) throws UnknownHostException {
+        MongoClientURI mongoClientURII = new MongoClientURI(mongoUri);
+        Repository.mongoClient = new MongoClient(mongoClientURII);
+        Repository.jongo = new Jongo(mongoClient.getDB(mongoClientURII.getDatabase()));
     }
+
+    public static Jongo getJongo() {
+        return jongo;
+    }
+
+    public static Repository instance() {
+        return new Repository();
+    }
+
+    private Repository() {}
 
     public Iterable<Subject> allSubjects() {
         MongoCollection subjects = jongo.getCollection("subjects");
