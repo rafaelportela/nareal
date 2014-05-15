@@ -3,12 +3,42 @@
 /* jasmine specs for controllers go here */
 
 describe('controllers', function() {
-  beforeEach(module('narealApp'));
 
-  it('should return activities', inject(function($controller) {
-      var scope = {},
-          controller = $controller('FeedlistController', {$scope: scope});
+  describe('FeedlistController', function() {
+    var scope,
+        controller,
+        $httpBackend;
 
-      expect(scope.activities.length).toBe(2);
-  }));
+    beforeEach(module('narealApp'));
+
+    beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+      $httpBackend = _$httpBackend_;
+      $httpBackend.expectGET('/services/activities').respond(
+        [
+          {
+            "title" : "first title",
+            "description" : "first description"
+          }
+        ]
+      );
+
+      scope = $rootScope.$new();
+      controller = $controller('FeedlistController', {$scope: scope});
+    }));
+
+    it('should fetch activities', function() {
+      expect(scope.activities).toBeUndefined();
+      $httpBackend.flush();
+
+      expect(scope.activities).toEqual(
+        [
+          {
+            "title": "first title",
+            "description": "first description"
+          }
+        ]
+      );
+    });
+  });
+
 });

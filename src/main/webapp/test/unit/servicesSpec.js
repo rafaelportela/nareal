@@ -12,3 +12,7 @@ describe('service', function() {
     }));
   });
 });
+
+describe('other service', function() {
+  it('should return activities', function() {});
+});

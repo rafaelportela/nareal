@@ -18,6 +18,8 @@ module.exports = function(config){
 
     autoWatch : false,
 
+    port : 9876,
+
     frameworks: ['jasmine'],
 
     browsers : ['Chrome'],

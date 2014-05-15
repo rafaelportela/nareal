@@ -6,7 +6,9 @@ module.exports = function(grunt) {
         karma: {
             unit: {
                 configFile: basedir + 'config/karma.conf.js',
-                background: true
+                browsers: ['PhantomJS'],
+                autoWatch: true,
+                port: 9876
             }
         },
         travis: {
@@ -17,7 +19,8 @@ module.exports = function(grunt) {
         watch: {
             karma: {
                 files: [basedir + 'app/**/*.js', basedir + 'test/unit/**/*.js'],
-                tasks: ['karma:unit:run']
+                tasks: ['karma:unit:run'],
+                port: 9876
             }
         }
     });
