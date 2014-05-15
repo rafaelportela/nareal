@@ -19,7 +19,7 @@ public class FeedlistService {
     public List<Activity> list() {
 
         List<Activity> list = new ArrayList<Activity>();
-        list.add(new Activity("title", "content"));
+        list.add(new Activity("First Activity", "Briefly description and content of my activity"));
 
         return list;
     }

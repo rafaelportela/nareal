@@ -3,8 +3,6 @@ package br.com.rafaelportela.nareal.services;
 
 import br.com.rafaelportela.nareal.model.Subject;
 import br.com.rafaelportela.nareal.repository.Repository;
-import com.mongodb.MongoClient;
-import org.jongo.Jongo;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;

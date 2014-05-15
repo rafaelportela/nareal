@@ -48,12 +48,18 @@ public class RepositoryTest {
     }
 
     @Test
-    public void shouldReturnASubjectByGivenId() {
+    public void shouldGiveAnIdToPersistedObject() {
         Subject subject = new Subject("noSQL databases");
+        repository.save(subject);
+        assertThat(subject.getId(), is(notNullValue()));
+    }
+
+    @Test
+    public void shouldReturnASubjectByGivenId() {
+        Subject subject = new Subject("testing");
         repository.save(subject);
 
         Subject returnedSubject = repository.getBy(subject.getId());
-        assertThat(returnedSubject.getTitle(), is("noSQL databases"));
+        assertThat(returnedSubject.getTitle(), is("testing"));
     }
-
 }
